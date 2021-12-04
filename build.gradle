@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+plugins {
+    id 'application'
+    id 'jacoco'
+}
+
+application {  mainClass = 'org.gradle.MyMain'  }
+jacoco { applyTo run }
+
+tasks.register('applicationCodeCoverageReport', JacocoReport) {
+    executionData run
+    sourceSets sourceSets.main
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
